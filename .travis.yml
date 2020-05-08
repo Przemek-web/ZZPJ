@@ -1,0 +1,6 @@
+language: java
+before_script:
+  - chmod a+x ./mvnw
+
+before_install:
+  - chmod +x mvnw
