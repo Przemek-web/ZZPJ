@@ -2,6 +2,7 @@ package pl.lodz.p.it.insta.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,6 +25,7 @@ public class Post implements Comparable<Post>{
     //location to potem bajerka
 
     @OneToMany (mappedBy = "post")
+    @Lazy(false)
     private Collection<Comment> comments = new ArrayList<>();
 
     @Override
