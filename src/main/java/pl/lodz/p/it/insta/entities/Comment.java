@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Comment {
+public class Comment implements Comparable<Comment>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,4 +21,9 @@ public class Comment {
     @ManyToOne
     @JsonIgnore
     private Post post;
+
+    @Override
+    public int compareTo(Comment comment) {
+        return this.addDate.compareTo(comment.addDate);
+    }
 }
