@@ -20,7 +20,7 @@ public class PostRepositoryTest {
 
     @Test
     public void getAllTest() {
-        Assert.assertEquals(postRepository.findAll().size(), 4);
+        Assert.assertEquals(postRepository.findAll().size(), 9);
     }
 
     @Test

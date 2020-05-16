@@ -18,11 +18,11 @@ public class TopicRepositoryTest {
 
     @Test
     public void getAllTest() {
-        Assert.assertEquals(topicRepository.findAll().size(), 3);
+        Assert.assertEquals(topicRepository.findAll().size(), 2);
     }
 
     @Test
     public void getPostsTest() {
-        Assert.assertEquals(topicRepository.getOne(1L).getForumPosts().size(),1);
+        Assert.assertEquals(topicRepository.getOne(1L).getForumPosts().size(),4);
     }
 }

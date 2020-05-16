@@ -16,6 +16,6 @@ public class TopicServiceTest {
 
     @Test
     public void getAll() {
-        Assert.assertEquals(topicService.getAll().size(), 3);
+        Assert.assertEquals(topicService.getAll().size(), 2);
     }
 }

@@ -34,8 +34,8 @@ public class TopicControllerTest {
                 .get("/forum")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(3)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].title", is("Co to jest za forum jak tu nikogo nie ma kurcze blade")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].title", is("Proponuję żęby każdy coś tu napisał o sobie :)")));
 
     }
 }
