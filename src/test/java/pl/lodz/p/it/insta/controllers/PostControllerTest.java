@@ -32,6 +32,6 @@ public class PostControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(9)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].description", is("Pierwszy raz na murze, ale wysoko")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[5].account.username", is("ObiKenobi14")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[4].account.username", is("ObiKenobi14")));
     }
 }

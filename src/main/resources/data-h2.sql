@@ -24,15 +24,15 @@ INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('clas
 
 INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('No weź się tato', {ts '1997-09-19 15:47:32.69'},4,8);
 
-INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/leia.jpg'),'Pif paf haha',{ts '1997-07-19 15:47:32.69'},3);
+INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/leia.jpg'),'Aresztowali mnie',{ts '1997-07-19 15:47:32.69'},3);
 
-INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('Wow super!', {ts '1997-09-21 15:47:32.69'},3,9);
+INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('No ładne rzeczy', {ts '1997-09-21 15:47:32.69'},3,9);
 
-INSERT INTO topic (title, account_id) VALUES ('Proponuję żęby każdy coś tu napisał o sobie :)', 1);
+INSERT INTO topic (title, account_id) VALUES ('Proponuje zeby kazdy cos tu napisal o sobie :)', 1);
 INSERT INTO forum_post (content, account_id, topic_id) VALUES ('To może ja zaczne jestem Jon ', 1,1);
 INSERT INTO forum_post (content, account_id, topic_id) VALUES ('Ja jestem Obi-Wan Kenobi potężny Jedi i znawca mocy', 2,1);
 INSERT INTO forum_post (content, account_id, topic_id) VALUES ('Ja jestem Lord Vader i bardzo nie lubie tych wszystkich Jedi...', 3,1);
 INSERT INTO forum_post (content, account_id, topic_id) VALUES ('Jestem przwódczyni rebeliantów Księżniczka Leia !!', 4,1);
 
-INSERT INTO topic (title, account_id) VALUES ('Jakieś rady jak zwalczyć rebeliantów', 3);
+INSERT INTO topic (title, account_id) VALUES ('Jakieś rady jak zwalczyć rebeliantów ?', 3);
 INSERT INTO forum_post (content, account_id, topic_id) VALUES ('Ja wiem ale nie powiem haha', 4,2);
