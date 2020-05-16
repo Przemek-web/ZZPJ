@@ -1,9 +1,8 @@
 package pl.lodz.p.it.insta.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.lodz.p.it.insta.dtos.NewTopicDto;
 import pl.lodz.p.it.insta.entities.Topic;
 import pl.lodz.p.it.insta.services.TopicService;
 
@@ -20,8 +19,16 @@ public class TopicController {
         this.topicService = topicService;
     }
 
-    @GetMapping
+    // http://localhost:8080/forum/
+    @GetMapping(produces = "application/json")
     public List<Topic> getAll() {
         return topicService.getAll();
+    }
+
+    @PostMapping("/addTopic")
+    public void addTopic(@RequestBody NewTopicDto newTopicDto){
+        String title = newTopicDto.getTitle();
+        int accountId = newTopicDto.getAccountId();
+        topicService.addTopic(title,accountId);
     }
 }
