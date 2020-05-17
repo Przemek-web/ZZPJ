@@ -25,10 +25,12 @@ public class TopicService {
         return topicRepository.findAll();
     }
 
-    public void addTopic(String title, int accountId){
+    public Topic getTopic(long id){return topicRepository.findById(id).orElse(null);}
+
+    public void addTopic(String title, long accountId){
         Topic topic = new Topic();
         topic.setTitle(title);
-        topic.setAccount(accountRepository.findById((long) accountId));
+        topic.setAccount(accountRepository.findById(accountId).orElse(null));
         topicRepository.save(topic);
     }
 }

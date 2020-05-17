@@ -14,4 +14,5 @@ INSERT INTO topic (title, account_id) VALUES ('Halko co jest 5', 1);
 INSERT INTO topic (title, account_id) VALUES ('Co to jest za forum jak tu nikogo nie ma kurcze blade', 1);
 INSERT INTO topic (title, account_id) VALUES ('Zmianka bo za dlugie do testow hehehehe', 1);
 
-INSERT INTO forum_post (content, account_id, topic_id) VALUES ('No nikogo nie ma sam sobie odpisuje zwariuje zaraz', 1,1)
+INSERT INTO forum_post (content, account_id, topic_id) VALUES ('No nikogo nie ma sam sobie odpisuje zwariuje zaraz', 1,1);
+INSERT INTO forum_post (content, account_id, topic_id) VALUES ('Forum Post 2', 1,2);
