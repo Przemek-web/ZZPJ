@@ -20,6 +20,6 @@ public class PostServiceTest {
 
     @Test
     public void getAll() {
-        Assert.assertEquals(postService.getAll().size(), 4);
+        Assert.assertEquals(postService.getAll().size(), 9);
     }
 }

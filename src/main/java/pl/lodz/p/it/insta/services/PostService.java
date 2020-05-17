@@ -37,7 +37,7 @@ public class PostService {
         comment.setContent(content);
         comment.setAddDate(LocalDateTime.now());
         // TODO zmienic na pobieranie usera
-        comment.setAccount(accountRepository.findByUsername("JonBekart12").get());
+        comment.setAccount(accountRepository.findByUsername("JonBękart12").get());
         comment.setPost(postRepository.getOne(Long.decode(postId)));
         commentRepository.save(comment);
     }
