@@ -30,7 +30,7 @@ public class TopicControllerTest {
 
     @Test
     public void getAll() throws Exception {
-        mvc.perform( MockMvcRequestBuilders
+        mvc.perform(MockMvcRequestBuilders
                 .get("/forum")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -38,4 +38,14 @@ public class TopicControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].title", is("Co to jest za forum jak tu nikogo nie ma kurcze blade")));
 
     }
+
+    @Test
+    public void getTopic() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                .get("forum/topic/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title", is("Co to jest za forum jak tu nikogo nie ma kurcze blade")));
+    }
+
 }
