@@ -43,7 +43,7 @@ public class ForumPostService {
 
     public void updateForumPost(long id, EditForumPostDto editForumPostDto){
         ForumPost editedPost = forumPostRepository.findById(id).orElse(new ForumPost());
-        editedPost.setTitle(editForumPostDto.getContent());
+        editedPost.setContent(editForumPostDto.getContent());
         editedPost.setAccount(accountRepository.findById(editForumPostDto.getAccountId()).orElse(null));
         editedPost.setTopic(topicRepository.findById(editForumPostDto.getTopicId()).orElse(null));
         forumPostRepository.save(editedPost);
