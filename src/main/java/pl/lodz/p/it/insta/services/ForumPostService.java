@@ -2,7 +2,9 @@ package pl.lodz.p.it.insta.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.lodz.p.it.insta.dtos.EditForumPostDto;
 import pl.lodz.p.it.insta.entities.ForumPost;
+import pl.lodz.p.it.insta.entities.Topic;
 import pl.lodz.p.it.insta.repositories.AccountRepository;
 import pl.lodz.p.it.insta.repositories.ForumPostRepository;
 import pl.lodz.p.it.insta.repositories.TopicRepository;
@@ -33,5 +35,17 @@ public class ForumPostService {
         forumPost.setAccount(accountRepository.getOne(accountId));
         forumPost.setTopic(topicRepository.getOne(topicId));
         forumPostRepository.save(forumPost);
+    }
+
+    public void deleteForumPost(long id){
+        forumPostRepository.delete(forumPostRepository.getOne(id));
+    }
+
+    public void updateForumPost(long id, EditForumPostDto editForumPostDto){
+        ForumPost editedPost = forumPostRepository.findById(id).orElse(new ForumPost());
+        editedPost.setTitle(editForumPostDto.getContent());
+        editedPost.setAccount(accountRepository.findById(editForumPostDto.getAccountId()).orElse(null));
+        editedPost.setTopic(topicRepository.findById(editForumPostDto.getTopicId()).orElse(null));
+        forumPostRepository.save(editedPost);
     }
 }

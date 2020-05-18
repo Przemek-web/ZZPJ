@@ -2,6 +2,8 @@ package pl.lodz.p.it.insta.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.lodz.p.it.insta.dtos.EditForumPostDto;
+import pl.lodz.p.it.insta.dtos.EditTopicDto;
 import pl.lodz.p.it.insta.dtos.NewForumPostDto;
 import pl.lodz.p.it.insta.dtos.NewTopicDto;
 import pl.lodz.p.it.insta.entities.Topic;
@@ -52,5 +54,25 @@ public class TopicController {
         forumPostService.addForumPost(content,accountId,topicId);
     }
 
+    // http://localhost:8080/forum/topic/id
+    @DeleteMapping("/topic/{id}")
+    public void deleteTopic(@PathVariable Long id) {
+        topicService.deleteTopic(id);
+    }
 
+    // http://localhost:8080/forum/forumPost/id
+    @DeleteMapping("/forumPost/{id}")
+    public void deleteForumPost(@PathVariable Long id) {
+        forumPostService.deleteForumPost(id);
+    }
+
+    @PutMapping("/forumPost/{id}")
+    public void updateTopic(@PathVariable Long id,@RequestBody EditTopicDto editTopicDto){
+        topicService.updateTopic(id, editTopicDto);
+    }
+
+    @PutMapping("/topic/{id}")
+    public void updateForumPost(@PathVariable Long id,@RequestBody EditForumPostDto editForumPostDto){
+        forumPostService.updateForumPost(id, editForumPostDto);
+    }
 }
