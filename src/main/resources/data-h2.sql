@@ -36,3 +36,4 @@ INSERT INTO forum_post (content, account_id, topic_id) VALUES ('Jestem przwódcz
 
 INSERT INTO topic (title, account_id) VALUES ('Jakieś rady jak zwalczyć rebeliantów ?', 3);
 INSERT INTO forum_post (content, account_id, topic_id) VALUES ('Ja wiem ale nie powiem haha', 4,2);
+

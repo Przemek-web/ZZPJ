@@ -30,7 +30,7 @@ public class TopicControllerTest {
 
     @Test
     public void getAll() throws Exception {
-        mvc.perform( MockMvcRequestBuilders
+        mvc.perform(MockMvcRequestBuilders
                 .get("/forum")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
