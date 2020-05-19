@@ -10,6 +10,7 @@ import pl.lodz.p.it.insta.repositories.PostRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +29,7 @@ public class PostService {
 
     public List<Post> getAll() {
         List<Post> posts = postRepository.findAll().stream().sorted().collect(Collectors.toList());
-        posts.stream().forEach(n -> n.setComments(n.getComments().stream().sorted().collect(Collectors.toList())));
+        posts.forEach(n -> n.setComments(n.getComments().stream().sorted().collect(Collectors.toList())));
         return posts;
     }
 
@@ -37,7 +38,7 @@ public class PostService {
         comment.setContent(content);
         comment.setAddDate(LocalDateTime.now());
         // TODO zmienic na pobieranie usera
-        comment.setAccount(accountRepository.findByUsername("JonBękart12").get());
+        comment.setAccount(accountRepository.findByUsername("JonBękart12").orElseThrow(NoSuchElementException::new));
         comment.setPost(postRepository.getOne(Long.decode(postId)));
         commentRepository.save(comment);
     }
