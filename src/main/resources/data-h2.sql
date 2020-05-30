@@ -13,27 +13,27 @@ INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('Ehh kiedy�
 INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('Komentarz 2 ', {ts '2015-04-17 18:47:52.69'},1,2);
 INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('Komentarz 3 ', {ts '2015-03-17 18:47:52.69'},1,2);
 
-INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/ben1.jpg'),'Ale jestem przystojniacha',{ts '1997-07-19 13:47:32.69'},2);
-INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/Ben_Kenobi.jpg'),'To ja staje do walki',{ts '1997-07-19 18:47:32.69'},2);
+INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/ben1.jpg'),'Ale jestem przystojniacha',{ts '1977-07-19 13:47:32.69'},2);
+INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/Ben_Kenobi.jpg'),'To ja staje do walki',{ts '1977-07-19 18:47:32.69'},2);
 
-INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('No nie da się ukryć ;) ', {ts '1997-08-19 18:47:32.69'},4,5);
-INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('Haha człowieku jak ty rozwalony zostałeś wtedy', {ts '1997-09-19 18:47:32.69'},3,6);
+INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('No nie da się ukryć ;) ', {ts '1977-08-19 18:47:32.69'},4,5);
+INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('Haha człowieku jak ty rozwalony zostałeś wtedy', {ts '1977-09-19 18:47:32.69'},3,6);
 
-INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/vader.jpg'),'Nie zadzierać ze mną bo to będzie ostatnia rzecz, która zobaczycie !!',{ts '1997-07-19 17:47:32.69'},3);
-INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/vader_leia.jpg'),'Córcia znowu narozrabiała to trzeba pouczyć',{ts '1997-07-19 15:47:32.69'},3);
+INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/vader.jpg'),'Nie zadzierać ze mną bo to będzie ostatnia rzecz, która zobaczycie !!',{ts '1977-07-19 17:47:32.69'},3);
+INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/vader_leia.jpg'),'Córcia znowu narozrabiała to trzeba pouczyć',{ts '1977-07-19 15:47:32.69'},3);
 
-INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('No weź się tato', {ts '1997-09-19 15:47:32.69'},4,8);
+INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('No weź się tato', {ts '1977-09-19 15:47:32.69'},4,8);
 
-INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/leia.jpg'),'Aresztowali mnie',{ts '1997-07-19 15:47:32.69'},3);
+INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('classpath:images/leia.jpg'),'Aresztowali mnie',{ts '1977-07-19 15:47:32.69'},3);
 
-INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('No ładne rzeczy', {ts '1997-09-21 15:47:32.69'},3,9);
+INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('No ładne rzeczy', {ts '1977-09-21 15:47:32.69'},3,9);
 
-INSERT INTO topic (title, account_id) VALUES ('Proponuje zeby kazdy cos tu napisal o sobie :)', 1);
-INSERT INTO forum_post (content, account_id, topic_id) VALUES ('To może ja zaczne jestem Jon ', 1,1);
-INSERT INTO forum_post (content, account_id, topic_id) VALUES ('Ja jestem Obi-Wan Kenobi potężny Jedi i znawca mocy', 2,1);
-INSERT INTO forum_post (content, account_id, topic_id) VALUES ('Ja jestem Lord Vader i bardzo nie lubie tych wszystkich Jedi...', 3,1);
-INSERT INTO forum_post (content, account_id, topic_id) VALUES ('Jestem przwódczyni rebeliantów Księżniczka Leia !!', 4,1);
+INSERT INTO topic (title, account_id, add_date) VALUES ('Proponuje zeby kazdy cos tu napisal o sobie :)', 1, {ts '2020-08-19 18:47:32.69'});
+INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('To może ja zaczne jestem Jon ', 1,1, {ts '2020-09-21 18:47:32.69'});
+INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Ja jestem Obi-Wan Kenobi potężny Jedi i znawca mocy', 2,1,{ts '2020-09-20 18:47:32.69'});
+INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Ja jestem Lord Vader i bardzo nie lubie tych wszystkich Jedi...', 3,1,{ts '2020-09-20 17:42:32.69'});
+INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Jestem przwódczyni rebeliantów Księżniczka Leia !!', 4,1, {ts '2020-09-21 16:41:32.69'});
 
-INSERT INTO topic (title, account_id) VALUES ('Jakieś rady jak zwalczyć rebeliantów ?', 3);
-INSERT INTO forum_post (content, account_id, topic_id) VALUES ('Ja wiem ale nie powiem haha', 4,2);
+INSERT INTO topic (title, account_id, add_date) VALUES ('Jakieś rady jak zwalczyć rebeliantów ?', 3,{ts '2020-09-20 18:47:32.69'});
+INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Ja wiem ale nie powiem haha', 4,2,{ts '2020-09-20 20:31:32.69'});
 
