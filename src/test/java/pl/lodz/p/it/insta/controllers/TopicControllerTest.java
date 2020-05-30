@@ -37,7 +37,7 @@ public class TopicControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].title", is("Proponuje zeby kazdy cos tu napisal o sobie :)")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].title", is("Proponuje zeby kazdy cos tu napisal o sobie :)")));
 
     }
 }
