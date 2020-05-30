@@ -8,6 +8,8 @@ import pl.lodz.p.it.insta.repositories.AccountRepository;
 import pl.lodz.p.it.insta.repositories.TopicRepository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class TopicService {
@@ -23,11 +25,15 @@ public class TopicService {
     }
 
     public List<Topic> getAll() {
-        return topicRepository.findAll();
+        List<Topic> topics = topicRepository.findAll().stream().sorted().collect(Collectors.toList());
+        topics.forEach(t -> t.setForumPosts(t.getForumPosts().stream().sorted().collect(Collectors.toList())));
+        return topics;
     }
 
     public Topic getTopic(long id) {
-        return topicRepository.findById(id).orElse(null);
+        Topic topic = topicRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        topic.setForumPosts(topic.getForumPosts().stream().sorted().collect(Collectors.toList()));
+        return topic;
     }
 
     public void addTopic(String title, long accountId) {
