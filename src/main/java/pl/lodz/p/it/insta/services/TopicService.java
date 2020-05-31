@@ -7,6 +7,7 @@ import pl.lodz.p.it.insta.entities.Topic;
 import pl.lodz.p.it.insta.repositories.AccountRepository;
 import pl.lodz.p.it.insta.repositories.TopicRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -36,10 +37,11 @@ public class TopicService {
         return topic;
     }
 
-    public void addTopic(String title, long accountId) {
+    public void addTopic(String title, String username) {
         Topic topic = new Topic();
         topic.setTitle(title);
-        topic.setAccount(accountRepository.findById(accountId).orElse(null));
+        topic.setAccount(accountRepository.findByUsername(username).orElseThrow(NoSuchElementException::new));
+        topic.setAddDate(LocalDateTime.now());
         topicRepository.save(topic);
     }
 

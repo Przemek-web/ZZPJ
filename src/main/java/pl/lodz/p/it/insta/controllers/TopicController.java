@@ -1,6 +1,9 @@
 package pl.lodz.p.it.insta.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.p.it.insta.dtos.EditForumPostDto;
 import pl.lodz.p.it.insta.dtos.EditTopicDto;
@@ -41,8 +44,9 @@ public class TopicController {
     @PostMapping("/addTopic")
     public void addTopic(@RequestBody NewTopicDto newTopicDto){
         String title = newTopicDto.getTitle();
-        long accountId = newTopicDto.getAccountId();
-        topicService.addTopic(title,accountId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        topicService.addTopic(title, currentPrincipalName);
     }
 
     // http://localhost:8080/forum/addForumPost

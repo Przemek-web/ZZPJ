@@ -28,12 +28,12 @@ INSERT INTO post (lob, description, add_date,account_id) VALUES (FILE_READ('clas
 
 INSERT INTO comment (content, add_date, account_id, post_id) VALUES ('No ładne rzeczy', {ts '1977-09-21 15:47:32.69'},3,9);
 
-INSERT INTO topic (title, account_id, add_date) VALUES ('Proponuje zeby kazdy cos tu napisal o sobie :)', 1, {ts '2020-08-19 18:47:32.69'});
-INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('To może ja zaczne jestem Jon ', 1,1, {ts '2020-09-21 18:47:32.69'});
-INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Ja jestem Obi-Wan Kenobi potężny Jedi i znawca mocy', 2,1,{ts '2020-09-20 18:47:32.69'});
-INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Ja jestem Lord Vader i bardzo nie lubie tych wszystkich Jedi...', 3,1,{ts '2020-09-20 17:42:32.69'});
-INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Jestem przwódczyni rebeliantów Księżniczka Leia !!', 4,1, {ts '2020-09-21 16:41:32.69'});
+INSERT INTO topic (title, account_id, add_date) VALUES ('Proponuje zeby kazdy cos tu napisal o sobie :)', 1, {ts '2020-02-19 18:47:32.69'});
+INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('To może ja zaczne jestem Jon ', 1,1, {ts '2020-02-21 18:47:32.69'});
+INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Ja jestem Obi-Wan Kenobi potężny Jedi i znawca mocy', 2,1,{ts '2020-02-20 18:47:32.69'});
+INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Ja jestem Lord Vader i bardzo nie lubie tych wszystkich Jedi...', 3,1,{ts '2020-02-20 17:42:32.69'});
+INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Jestem przwódczyni rebeliantów Księżniczka Leia !!', 4,1, {ts '2020-02-21 16:41:32.69'});
 
-INSERT INTO topic (title, account_id, add_date) VALUES ('Jakieś rady jak zwalczyć rebeliantów ?', 3,{ts '2020-09-20 18:47:32.69'});
-INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Ja wiem ale nie powiem haha', 4,2,{ts '2020-09-20 20:31:32.69'});
+INSERT INTO topic (title, account_id, add_date) VALUES ('Jakieś rady jak zwalczyć rebeliantów ?', 3,{ts '2020-04-20 18:47:32.69'});
+INSERT INTO forum_post (content, account_id, topic_id, add_date) VALUES ('Ja wiem ale nie powiem haha', 4,2,{ts '2020-04-20 20:31:32.69'});
 
