@@ -8,6 +8,5 @@ import lombok.Setter;
 @Setter
 public class NewForumPostDto {
     String content;
-    long accountId;
     long topicId;
 }

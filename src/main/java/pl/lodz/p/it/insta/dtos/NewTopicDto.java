@@ -7,5 +7,4 @@ import lombok.Setter;
 @Setter
 public class NewTopicDto {
     String title;
-    int accountId;
 }
