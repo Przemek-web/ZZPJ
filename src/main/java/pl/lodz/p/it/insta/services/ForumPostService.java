@@ -1,15 +1,16 @@
 package pl.lodz.p.it.insta.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.lodz.p.it.insta.dtos.EditForumPostDto;
 import pl.lodz.p.it.insta.entities.ForumPost;
-import pl.lodz.p.it.insta.entities.Topic;
 import pl.lodz.p.it.insta.repositories.AccountRepository;
 import pl.lodz.p.it.insta.repositories.ForumPostRepository;
 import pl.lodz.p.it.insta.repositories.TopicRepository;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
 
 @Service
 public class ForumPostService {
@@ -25,14 +26,12 @@ public class ForumPostService {
         this.topicRepository = topicRepository;
     }
 
-    public List<ForumPost> getAll() {
-        return forumPostRepository.findAll();
-    }
-
-    public void addForumPost(String content, long accountId, long topicId) {
+    public void addForumPost(String content, long topicId) {
         ForumPost forumPost = new ForumPost();
         forumPost.setContent(content);
-        forumPost.setAccount(accountRepository.getOne(accountId));
+        forumPost.setAddDate(LocalDateTime.now());
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        forumPost.setAccount(accountRepository.findByUsername(username).orElseThrow(NoSuchElementException::new));
         forumPost.setTopic(topicRepository.getOne(topicId));
         forumPostRepository.save(forumPost);
     }

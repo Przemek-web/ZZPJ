@@ -43,19 +43,15 @@ public class TopicController {
     // http://localhost:8080/forum/addTopic
     @PostMapping("/addTopic")
     public void addTopic(@RequestBody NewTopicDto newTopicDto){
-        String title = newTopicDto.getTitle();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        topicService.addTopic(title, currentPrincipalName);
+        topicService.addTopic(newTopicDto.getTitle());
     }
 
     // http://localhost:8080/forum/addForumPost
     @PostMapping("/addForumPost")
     public void addForumPost(@RequestBody NewForumPostDto newForumPostDto){
         String content = newForumPostDto.getContent();
-        long accountId = newForumPostDto.getAccountId();
         long topicId  = newForumPostDto.getTopicId();
-        forumPostService.addForumPost(content,accountId,topicId);
+        forumPostService.addForumPost(content,topicId);
     }
 
     // http://localhost:8080/forum/topic/id
