@@ -1,9 +1,11 @@
 package pl.lodz.p.it.insta.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.lodz.p.it.insta.entities.Comment;
 import pl.lodz.p.it.insta.entities.Post;
+import pl.lodz.p.it.insta.entities.Topic;
 import pl.lodz.p.it.insta.repositories.AccountRepository;
 import pl.lodz.p.it.insta.repositories.CommentRepository;
 import pl.lodz.p.it.insta.repositories.PostRepository;
@@ -41,5 +43,15 @@ public class PostService {
         comment.setAccount(accountRepository.findByUsername("JonBękart12").orElseThrow(NoSuchElementException::new));
         comment.setPost(postRepository.getOne(Long.decode(postId)));
         commentRepository.save(comment);
+    }
+
+    public void addPost(String description, byte[] lob) {
+        Post post = new Post();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        post.setDescription(description);
+        post.setAccount(accountRepository.findByUsername(username).orElseThrow(NoSuchElementException::new));
+        post.setAddDate(LocalDateTime.now());
+        post.setLob(lob);
+        postRepository.save(post);
     }
 }
