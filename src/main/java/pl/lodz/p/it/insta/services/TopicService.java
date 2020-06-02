@@ -52,10 +52,9 @@ public class TopicService {
         topicRepository.delete(topicRepository.getOne(id));
     }
 
-    public void updateTopic(long id, EditTopicDto editTopicDto) {
-        Topic editedTopic = topicRepository.findById(id).orElse(new Topic());
+    public void updateTopic(EditTopicDto editTopicDto) {
+        Topic editedTopic = topicRepository.findById(editTopicDto.getTopicId()).orElseThrow(NoSuchElementException::new);
         editedTopic.setTitle(editTopicDto.getTitle());
-        editedTopic.setAccount(accountRepository.findById(editTopicDto.getAccountId()).orElse(null));
         topicRepository.save(editedTopic);
     }
 }
