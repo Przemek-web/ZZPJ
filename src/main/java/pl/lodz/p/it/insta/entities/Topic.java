@@ -20,8 +20,7 @@ public class Topic implements Comparable<Topic>{
     private LocalDateTime addDate;
     @ManyToOne
     private Account account;
-    //sugestia
-    @OneToMany(mappedBy = "topic")
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.REMOVE)
     private Collection<ForumPost> forumPosts = new ArrayList<>();
 
     @Override

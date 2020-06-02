@@ -1,13 +1,9 @@
 package pl.lodz.p.it.insta.dtos;
 
-import lombok.Getter;
-import lombok.Setter;
-
 
 public class EditForumPostDto {
     String content;
-    long accountId;
-    long topicId;
+    long postId;
 
     public String getContent() {
         return content;
@@ -17,19 +13,11 @@ public class EditForumPostDto {
         this.content = content;
     }
 
-    public long getAccountId() {
-        return accountId;
+    public long getPostId() {
+        return postId;
     }
 
-    public void setAccountId(long accountId) {
-        this.accountId = accountId;
-    }
-
-    public long getTopicId() {
-        return topicId;
-    }
-
-    public void setTopicId(long topicId) {
-        this.topicId = topicId;
+    public void setPostId(long postId) {
+        this.postId = postId;
     }
 }

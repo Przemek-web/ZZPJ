@@ -69,11 +69,12 @@ public class TopicController {
     //http://localhost:8080/forum/editTopic
     @PutMapping("/editTopic")
     public void updateTopic(@RequestBody EditTopicDto editTopicDto){
-        topicService.updateTopic(editTopicDto);
+        topicService.updateTopic(editTopicDto.getTopicId(), editTopicDto.getTitle());
     }
 
-    @PutMapping("editForumPost/{id}")
-    public void updateForumPost(@PathVariable Long id,@RequestBody EditForumPostDto editForumPostDto){
-        forumPostService.updateForumPost(id, editForumPostDto);
+    //http://localhost:8080/forum/editForumPost
+    @PutMapping("/editForumPost")
+    public void updateForumPost(@RequestBody EditForumPostDto editForumPostDto){
+        forumPostService.updateForumPost(editForumPostDto.getPostId(), editForumPostDto.getContent());
     }
 }

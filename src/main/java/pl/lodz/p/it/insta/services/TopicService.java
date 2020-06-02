@@ -3,7 +3,6 @@ package pl.lodz.p.it.insta.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import pl.lodz.p.it.insta.dtos.EditTopicDto;
 import pl.lodz.p.it.insta.entities.Topic;
 import pl.lodz.p.it.insta.repositories.AccountRepository;
 import pl.lodz.p.it.insta.repositories.TopicRepository;
@@ -52,9 +51,9 @@ public class TopicService {
         topicRepository.delete(topicRepository.getOne(id));
     }
 
-    public void updateTopic(EditTopicDto editTopicDto) {
-        Topic editedTopic = topicRepository.findById(editTopicDto.getTopicId()).orElseThrow(NoSuchElementException::new);
-        editedTopic.setTitle(editTopicDto.getTitle());
+    public void updateTopic(long topicId, String title) {
+        Topic editedTopic = topicRepository.findById(topicId).orElseThrow(NoSuchElementException::new);
+        editedTopic.setTitle(title);
         topicRepository.save(editedTopic);
     }
 }
