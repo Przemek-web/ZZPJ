@@ -3,7 +3,7 @@ package pl.lodz.p.it.insta.dtos;
 
 public class EditTopicDto {
     String title;
-    long accountId;
+    long topicId;
 
     public String getTitle() {
         return title;
@@ -13,11 +13,11 @@ public class EditTopicDto {
         this.title = title;
     }
 
-    public long getAccountId() {
-        return accountId;
+    public long getTopicId() {
+        return topicId;
     }
 
-    public void setAccountId(long accountId) {
-        this.accountId = accountId;
+    public void setTopicId(long topicId) {
+        this.topicId = topicId;
     }
 }

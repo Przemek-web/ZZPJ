@@ -3,7 +3,6 @@ package pl.lodz.p.it.insta.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import pl.lodz.p.it.insta.dtos.EditForumPostDto;
 import pl.lodz.p.it.insta.entities.ForumPost;
 import pl.lodz.p.it.insta.repositories.AccountRepository;
 import pl.lodz.p.it.insta.repositories.ForumPostRepository;
@@ -40,11 +39,9 @@ public class ForumPostService {
         forumPostRepository.delete(forumPostRepository.getOne(id));
     }
 
-    public void updateForumPost(long id, EditForumPostDto editForumPostDto){
+    public void updateForumPost(long id, String content){
         ForumPost editedPost = forumPostRepository.findById(id).orElse(new ForumPost());
-        editedPost.setContent(editForumPostDto.getContent());
-        editedPost.setAccount(accountRepository.findById(editForumPostDto.getAccountId()).orElse(null));
-        editedPost.setTopic(topicRepository.findById(editForumPostDto.getTopicId()).orElse(null));
+        editedPost.setContent(content);
         forumPostRepository.save(editedPost);
     }
 }
