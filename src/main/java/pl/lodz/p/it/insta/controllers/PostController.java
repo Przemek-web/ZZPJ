@@ -33,7 +33,7 @@ public class PostController {
         postService.addCommentToPost(postId, content);
     }
 
-    // http://localhost:8080/posts/topic/id
+    // http://localhost:8080/posts/post/id
     @DeleteMapping("/post/{id}")
     public void deletePost(@PathVariable Long id) {
         postService.deletePost(id);
