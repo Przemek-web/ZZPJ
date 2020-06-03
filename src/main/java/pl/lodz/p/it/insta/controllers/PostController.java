@@ -38,4 +38,10 @@ public class PostController {
     public void deletePost(@PathVariable Long id) {
         postService.deletePost(id);
     }
+
+    // http://localhost:8080/posts/postComment/id
+    @DeleteMapping("/postComment/{id}")
+    public void deletePostComment(@PathVariable Long id) {
+        postService.deletePostComment(id);
+    }
 }

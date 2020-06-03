@@ -50,4 +50,8 @@ public class PostService {
         postRepository.delete(postRepository.getOne(id));
     }
 
+    public void deletePostComment(long id) {
+        commentRepository.delete(commentRepository.getOne(id));
+    }
+
 }
