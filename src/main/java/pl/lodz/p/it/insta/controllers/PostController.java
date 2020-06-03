@@ -32,4 +32,10 @@ public class PostController {
         String content=newCommentDto.getContent();
         postService.addCommentToPost(postId, content);
     }
+
+    // http://localhost:8080/posts/topic/id
+    @DeleteMapping("/post/{id}")
+    public void deletePost(@PathVariable Long id) {
+        postService.deletePost(id);
+    }
 }
