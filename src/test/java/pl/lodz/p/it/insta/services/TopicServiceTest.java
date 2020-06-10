@@ -6,14 +6,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.lodz.p.it.insta.entities.Topic;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
+@WithMockUser(username = "ObiKenobi14", password = "Duch123")
 public class TopicServiceTest {
 
     @Autowired
@@ -31,5 +35,47 @@ public class TopicServiceTest {
         Assert.assertTrue(Ordering.natural().reverse().isOrdered(topic.getForumPosts()));
         Assert.assertEquals(topic.getForumPosts().size(), 4);
         Assert.assertEquals(topic.getTitle(), "Proponuję żeby każdy coś tu napisał o sobie :)");
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void getTopicExceptionTest() {
+        topicService.getTopic(10);
+    }
+
+    @Test
+    public void addTopicTest() {
+        topicService.addTopic("Testowy temat");
+
+        Topic topic = topicService.getAll().get(0);
+
+        Assert.assertEquals(topicService.getAll().size(), 3);
+        Assert.assertEquals(topic.getTitle(), "Testowy temat");
+        Assert.assertEquals(topic.getAccount().getUsername(), "ObiKenobi14");
+        Assert.assertEquals(topic.getAddDate().getMinute(), LocalDateTime.now().getMinute());
+        Assert.assertTrue(topic.getForumPosts().isEmpty());
+
+        topicService.deleteTopic(topic.getId());
+        Assert.assertEquals(topicService.getAll().size(), 2);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void deleteExceptionTest() {
+        topicService.deleteTopic(10);
+    }
+
+    @Test
+    public void updateTest() {
+        String oldTitle = topicService.getTopic(1).getTitle();
+
+        topicService.updateTopic(1, "Testowa zmiana");
+
+        Topic topicAfterChange = topicService.getTopic(1);
+        Assert.assertNotEquals(oldTitle, topicAfterChange.getTitle());
+        Assert.assertEquals(topicAfterChange.getTitle(), "Testowa zmiana");
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void updateExceptionTest() {
+        topicService.updateTopic(10, "Testowa zmiana");
     }
 }

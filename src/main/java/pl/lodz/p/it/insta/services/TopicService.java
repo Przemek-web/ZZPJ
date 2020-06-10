@@ -48,7 +48,7 @@ public class TopicService {
     }
 
     public void deleteTopic(long id) {
-        topicRepository.delete(topicRepository.getOne(id));
+        topicRepository.delete(topicRepository.findById(id).orElseThrow(NoSuchElementException::new));
     }
 
     public void updateTopic(long topicId, String title) {

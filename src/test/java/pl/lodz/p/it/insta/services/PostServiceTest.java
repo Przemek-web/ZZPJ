@@ -21,6 +21,7 @@ import pl.lodz.p.it.insta.repositories.PostRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
@@ -28,7 +29,6 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @Transactional
 @WithMockUser(username = "ObiKenobi14", password = "Duch123")
-@EnableConfigurationProperties
 public class PostServiceTest {
 
     @Autowired
@@ -48,7 +48,7 @@ public class PostServiceTest {
     }
 
     @Test
-    public void addCommentsTest() {
+    public void addCommentTest() {
         postService.addCommentToPost(2, "Komentarz testowy");
 
         Post post = postService.getAll().get(0);
@@ -67,5 +67,8 @@ public class PostServiceTest {
         Assert.assertEquals(comments.size(), 3);*/
     }
 
-
+    @Test(expected = NoSuchElementException.class)
+    public void addCommentExceptionTest() {
+        postService.addCommentToPost(72, "Komentarz testowy 2");
+    }
 }
