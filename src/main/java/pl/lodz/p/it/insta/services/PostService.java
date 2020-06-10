@@ -3,17 +3,15 @@ package pl.lodz.p.it.insta.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.it.insta.entities.Comment;
 import pl.lodz.p.it.insta.entities.Post;
-import pl.lodz.p.it.insta.entities.Topic;
+import pl.lodz.p.it.insta.exceptions.ResourceNotFoundException;
 import pl.lodz.p.it.insta.repositories.AccountRepository;
 import pl.lodz.p.it.insta.repositories.CommentRepository;
 import pl.lodz.p.it.insta.repositories.PostRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,8 +39,10 @@ public class PostService {
         comment.setContent(content);
         comment.setAddDate(LocalDateTime.now());
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        comment.setAccount(accountRepository.findByUsername(username).orElseThrow(NoSuchElementException::new));
-        comment.setPost(postRepository.findById(postId).orElseThrow(NoSuchElementException::new));
+        comment.setAccount(accountRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Account", "username", username)));
+        comment.setPost(postRepository.findById(postId)
+                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId)));
         commentRepository.save(comment);
     }
 

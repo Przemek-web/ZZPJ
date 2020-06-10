@@ -6,5 +6,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class NewTopicDto {
-    String title;
+    private String title;
+
+    public NewTopicDto(String title) {
+        this.title = title;
+    }
+
+    public NewTopicDto() {
+    }
 }

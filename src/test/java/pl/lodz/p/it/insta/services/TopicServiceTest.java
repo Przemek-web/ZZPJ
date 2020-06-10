@@ -9,10 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.lodz.p.it.insta.entities.Topic;
+import pl.lodz.p.it.insta.exceptions.ResourceNotFoundException;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.NoSuchElementException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,7 +37,7 @@ public class TopicServiceTest {
         Assert.assertEquals(topic.getTitle(), "Proponuję żeby każdy coś tu napisał o sobie :)");
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test(expected = ResourceNotFoundException.class)
     public void getTopicExceptionTest() {
         topicService.getTopic(10);
     }
@@ -58,7 +58,7 @@ public class TopicServiceTest {
         Assert.assertEquals(topicService.getAll().size(), 2);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test(expected = ResourceNotFoundException.class)
     public void deleteExceptionTest() {
         topicService.deleteTopic(10);
     }
@@ -74,7 +74,7 @@ public class TopicServiceTest {
         Assert.assertEquals(topicAfterChange.getTitle(), "Testowa zmiana");
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test(expected = ResourceNotFoundException.class)
     public void updateExceptionTest() {
         topicService.updateTopic(10, "Testowa zmiana");
     }

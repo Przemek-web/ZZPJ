@@ -5,25 +5,16 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.it.insta.entities.Comment;
 import pl.lodz.p.it.insta.entities.Post;
-import pl.lodz.p.it.insta.repositories.CommentRepository;
-import pl.lodz.p.it.insta.repositories.PostRepository;
+import pl.lodz.p.it.insta.exceptions.ResourceNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -67,7 +58,7 @@ public class PostServiceTest {
         Assert.assertEquals(comments.size(), 3);*/
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test(expected = ResourceNotFoundException.class)
     public void addCommentExceptionTest() {
         postService.addCommentToPost(72, "Komentarz testowy 2");
     }

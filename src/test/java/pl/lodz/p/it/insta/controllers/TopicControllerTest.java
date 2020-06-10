@@ -1,5 +1,6 @@
 package pl.lodz.p.it.insta.controllers;
 
+import com.google.gson.Gson;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +16,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import pl.lodz.p.it.insta.dtos.NewForumPostDto;
+import pl.lodz.p.it.insta.dtos.NewTopicDto;
 import pl.lodz.p.it.insta.services.TopicService;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -30,6 +33,8 @@ public class TopicControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    private Gson gson = new Gson();
+
     @Test
     public void getAll() throws Exception {
         mvc.perform(MockMvcRequestBuilders
@@ -39,5 +44,87 @@ public class TopicControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].title", is("Proponuję żeby każdy coś tu napisał o sobie :)")));
 
+    }
+
+    @Test
+    public void getTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                .get("/forum/topic/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title", is("Proponuję żeby każdy coś tu napisał o sobie :)")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.account.username", is("JonBękart12")));
+    }
+
+    @Test
+    public void getWrongTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                .get("/forum/topic/10")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(404));
+    }
+
+    @Test
+    public void addTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                .post("/forum/addTopic")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(gson.toJson(new NewTopicDto("Testowy temat"))))
+                .andExpect(status().isOk());
+
+        mvc.perform(MockMvcRequestBuilders
+                .get("/forum")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(3)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].title", is("Testowy temat")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].account.username", is("ObiKenobi14")));
+    }
+
+    @Test
+    public void addPostTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                .post("/forum/addForumPost")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(gson.toJson(new NewForumPostDto("Testowy post", 2))))
+                .andExpect(status().isOk());
+
+        mvc.perform(MockMvcRequestBuilders
+                .get("/forum/topic/2")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.forumPosts", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.forumPosts[1].account.username", is("ObiKenobi14")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.forumPosts[1].content", is("Testowy post")));
+    }
+
+    @Test
+    public void addPostWrongTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                .post("/forum/addForumPost")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(gson.toJson(new NewForumPostDto("Testowy post", 10))))
+                .andExpect(status().is(404));
+    }
+
+    @Test
+    public void deleteTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                .delete("/forum/topic/2")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        mvc.perform(MockMvcRequestBuilders
+                .get("/forum/topic/2")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(404));
+    }
+
+    @Test
+    public void deleteWrongTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                .delete("/forum/topic/10")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(404));
     }
 }
