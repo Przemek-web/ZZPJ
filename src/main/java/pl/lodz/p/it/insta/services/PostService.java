@@ -3,6 +3,7 @@ package pl.lodz.p.it.insta.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.it.insta.entities.Comment;
 import pl.lodz.p.it.insta.entities.Post;
 import pl.lodz.p.it.insta.entities.Topic;
@@ -35,14 +36,13 @@ public class PostService {
         return posts;
     }
 
-    public void addCommentToPost(String postId, String content) {
+    public void addCommentToPost(long postId, String content) {
         Comment comment = new Comment();
         comment.setContent(content);
         comment.setAddDate(LocalDateTime.now());
-
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         comment.setAccount(accountRepository.findByUsername(username).orElseThrow(NoSuchElementException::new));
-        comment.setPost(postRepository.getOne(Long.decode(postId)));
+        comment.setPost(postRepository.findById(postId).orElseThrow(NoSuchElementException::new));
         commentRepository.save(comment);
     }
 

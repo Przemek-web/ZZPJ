@@ -40,7 +40,7 @@ public class ForumPostService {
     }
 
     public void updateForumPost(long id, String content){
-        ForumPost editedPost = forumPostRepository.findById(id).orElse(new ForumPost());
+        ForumPost editedPost = forumPostRepository.findById(id).orElseThrow(NoSuchElementException::new);
         editedPost.setContent(content);
         forumPostRepository.save(editedPost);
     }

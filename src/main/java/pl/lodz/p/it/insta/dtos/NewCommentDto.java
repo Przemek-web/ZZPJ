@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class NewCommentDto {
-    String postId;
+    long postId;
     String content;
 }

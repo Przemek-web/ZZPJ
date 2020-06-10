@@ -25,6 +25,8 @@ public class CommentRepositoryTest {
         comment.setContent("content");
         commentRepository.save(comment);
         Assert.assertTrue(commentRepository.exists(Example.of(comment)));
+        commentRepository.delete(comment);
+        Assert.assertFalse(commentRepository.exists(Example.of(comment)));
     }
 
     @Test(expected = ConstraintViolationException.class)
