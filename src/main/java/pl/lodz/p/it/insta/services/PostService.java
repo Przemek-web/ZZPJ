@@ -12,6 +12,7 @@ import pl.lodz.p.it.insta.repositories.PostRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,6 +47,16 @@ public class PostService {
         commentRepository.save(comment);
     }
 
+    public void addPost(String description, byte[] lob) {
+        Post post = new Post();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        post.setDescription(description);
+        post.setAccount(accountRepository.findByUsername(username).orElseThrow(NoSuchElementException::new));
+        post.setAddDate(LocalDateTime.now());
+        post.setLob(lob);
+        postRepository.save(post);
+    }
+
     public void deletePost(long id) {
         postRepository.delete(postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post", "id", id)));
@@ -55,5 +66,4 @@ public class PostService {
         commentRepository.delete(commentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Comment", "id", id)));
     }
-
 }
