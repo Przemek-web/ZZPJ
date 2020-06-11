@@ -5,9 +5,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import pl.lodz.p.it.insta.entities.Account;
 import pl.lodz.p.it.insta.entities.Comment;
+import pl.lodz.p.it.insta.entities.Post;
 
 import javax.validation.ConstraintViolationException;
+import java.time.LocalDateTime;
 
 
 @RunWith(SpringRunner.class)
@@ -16,13 +19,6 @@ public class CommentRepositoryTest {
 
     @Autowired
     private CommentRepository commentRepository;
-
-    @Test
-    public void addCommentToPost() {
-        Comment comment = new Comment();
-        comment.setContent("content");
-        commentRepository.save(comment);
-    }
 
     @Test(expected = ConstraintViolationException.class)
     public void addEmptyCommentToPost() {
