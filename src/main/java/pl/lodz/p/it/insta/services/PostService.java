@@ -5,7 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.lodz.p.it.insta.entities.Comment;
 import pl.lodz.p.it.insta.entities.Post;
-import pl.lodz.p.it.insta.entities.Topic;
 import pl.lodz.p.it.insta.exceptions.ResourceNotFoundException;
 import pl.lodz.p.it.insta.repositories.AccountRepository;
 import pl.lodz.p.it.insta.repositories.CommentRepository;
@@ -13,6 +12,7 @@ import pl.lodz.p.it.insta.repositories.PostRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
