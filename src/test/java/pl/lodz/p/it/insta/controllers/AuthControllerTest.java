@@ -10,11 +10,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import pl.lodz.p.it.insta.dtos.EditTopicDto;
 import pl.lodz.p.it.insta.security.payloads.LoginRequest;
 import pl.lodz.p.it.insta.security.payloads.SignUpRequest;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -25,7 +23,7 @@ public class AuthControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Test
     public void authenticateUser() throws Exception {

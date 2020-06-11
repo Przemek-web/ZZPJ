@@ -36,6 +36,4 @@ public class CommentRepositoryTest {
         commentRepository.save(comment);
         Assert.assertFalse(commentRepository.exists(Example.of(comment)));
     }
-
-
 }

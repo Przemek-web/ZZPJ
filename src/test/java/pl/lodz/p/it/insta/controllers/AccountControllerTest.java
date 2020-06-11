@@ -1,6 +1,5 @@
 package pl.lodz.p.it.insta.controllers;
 
-import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -30,7 +26,7 @@ public class AccountControllerTest {
 
     @Test
     public void getUserProfileTest() throws Exception {
-        mvc.perform( MockMvcRequestBuilders
+        mvc.perform(MockMvcRequestBuilders
                 .get("/accounts/Ksiezniczka123")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -41,7 +37,7 @@ public class AccountControllerTest {
 
     @Test
     public void getUserProfileWrongTest() throws Exception {
-        mvc.perform( MockMvcRequestBuilders
+        mvc.perform(MockMvcRequestBuilders
                 .get("/accounts/NieMaGo")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(404));
@@ -49,13 +45,13 @@ public class AccountControllerTest {
 
     @Test
     public void checkUsernameAvailability() throws Exception {
-        mvc.perform( MockMvcRequestBuilders
+        mvc.perform(MockMvcRequestBuilders
                 .get("/accounts/checkUsernameAvailability")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("username", "NieMaGo"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.available", is(true)));
 
-        mvc.perform( MockMvcRequestBuilders
+        mvc.perform(MockMvcRequestBuilders
                 .get("/accounts/checkUsernameAvailability")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("username", "$$VADER$$"))
@@ -64,13 +60,13 @@ public class AccountControllerTest {
 
     @Test
     public void checkEmailAvailability() throws Exception {
-        mvc.perform( MockMvcRequestBuilders
+        mvc.perform(MockMvcRequestBuilders
                 .get("/accounts/checkEmailAvailability")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("email", "NieMaGo@wp.pl"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.available", is(true)));
 
-        mvc.perform( MockMvcRequestBuilders
+        mvc.perform(MockMvcRequestBuilders
                 .get("/accounts/checkEmailAvailability")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("email", "vader@02.pl"))

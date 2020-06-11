@@ -45,7 +45,7 @@ public class PostServiceTest {
         Post post = postService.getAll().get(0);
         List<Comment> comments = (List<Comment>) post.getComments();
         Comment comment = comments.get(comments.size() - 1);
-        Assert.assertEquals(comment.getContent() , "Komentarz testowy");
+        Assert.assertEquals(comment.getContent(), "Komentarz testowy");
         Assert.assertEquals(comments.size(), 4);
         Assert.assertEquals(comment.getAccount().getUsername(), "ObiKenobi14");
         Assert.assertEquals(comment.getAddDate().getMinute(), LocalDateTime.now().getMinute());

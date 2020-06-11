@@ -1,15 +1,11 @@
 package pl.lodz.p.it.insta.controllers;
 
 import com.google.gson.Gson;
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -20,7 +16,6 @@ import pl.lodz.p.it.insta.dtos.EditForumPostDto;
 import pl.lodz.p.it.insta.dtos.EditTopicDto;
 import pl.lodz.p.it.insta.dtos.NewForumPostDto;
 import pl.lodz.p.it.insta.dtos.NewTopicDto;
-import pl.lodz.p.it.insta.services.TopicService;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -32,10 +27,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser(username = "ObiKenobi14", password = "Duch123")
 public class TopicControllerTest {
 
+    private final Gson gson = new Gson();
     @Autowired
     private MockMvc mvc;
-
-    private Gson gson = new Gson();
 
     @Test
     public void getAll() throws Exception {
@@ -45,7 +39,6 @@ public class TopicControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].title", is("Proponuję żeby każdy coś tu napisał o sobie :)")));
-
     }
 
     @Test

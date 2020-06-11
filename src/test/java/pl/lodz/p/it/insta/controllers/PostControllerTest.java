@@ -16,7 +16,6 @@ import pl.lodz.p.it.insta.dtos.NewCommentDto;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -28,7 +27,7 @@ public class PostControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Test
     public void getAllTest() throws Exception {
