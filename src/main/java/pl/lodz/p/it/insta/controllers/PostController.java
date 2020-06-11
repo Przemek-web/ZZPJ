@@ -31,7 +31,7 @@ public class PostController {
 
     @PostMapping("/addCommentToPost")
     public void addCommentToPost(@RequestBody NewCommentDto newCommentDto) {
-        String postId = newCommentDto.getPostId();
+        long postId = newCommentDto.getPostId();
         String content = newCommentDto.getContent();
         postService.addCommentToPost(postId, content);
     }
@@ -45,12 +45,13 @@ public class PostController {
         } catch (IOException e) {
             logger.info("File upload problem");
         }
+    }
 
     @DeleteMapping("/post/{id}")
     public void deletePost(@PathVariable Long id) {
         postService.deletePost(id);
     }
-  
+
     @DeleteMapping("/postComment/{id}")
     public void deletePostComment(@PathVariable Long id) {
         postService.deletePostComment(id);
