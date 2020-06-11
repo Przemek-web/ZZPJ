@@ -28,8 +28,8 @@ public class PostController {
     // http://localhost:8080/posts/addCommentToPost/
     @PostMapping("/addCommentToPost")
     public void addCommentToPost(@RequestBody NewCommentDto newCommentDto) {
-        String postId= newCommentDto.getPostId();
-        String content=newCommentDto.getContent();
+        long postId = newCommentDto.getPostId();
+        String content = newCommentDto.getContent();
         postService.addCommentToPost(postId, content);
     }
 

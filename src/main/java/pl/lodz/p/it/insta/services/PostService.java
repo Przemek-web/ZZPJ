@@ -5,14 +5,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.lodz.p.it.insta.entities.Comment;
 import pl.lodz.p.it.insta.entities.Post;
-import pl.lodz.p.it.insta.entities.Topic;
+import pl.lodz.p.it.insta.exceptions.ResourceNotFoundException;
 import pl.lodz.p.it.insta.repositories.AccountRepository;
 import pl.lodz.p.it.insta.repositories.CommentRepository;
 import pl.lodz.p.it.insta.repositories.PostRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,23 +34,26 @@ public class PostService {
         return posts;
     }
 
-    public void addCommentToPost(String postId, String content) {
+    public void addCommentToPost(long postId, String content) {
         Comment comment = new Comment();
         comment.setContent(content);
         comment.setAddDate(LocalDateTime.now());
-
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        comment.setAccount(accountRepository.findByUsername(username).orElseThrow(NoSuchElementException::new));
-        comment.setPost(postRepository.getOne(Long.decode(postId)));
+        comment.setAccount(accountRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Account", "username", username)));
+        comment.setPost(postRepository.findById(postId)
+                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId)));
         commentRepository.save(comment);
     }
 
     public void deletePost(long id) {
-        postRepository.delete(postRepository.getOne(id));
+        postRepository.delete(postRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", id)));
     }
 
     public void deletePostComment(long id) {
-        commentRepository.delete(commentRepository.getOne(id));
+        commentRepository.delete(commentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Comment", "id", id)));
     }
 
 }
