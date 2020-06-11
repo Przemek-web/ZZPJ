@@ -24,31 +24,26 @@ public class PostController {
         this.postService = postService;
     }
 
-    // http://localhost:8080/posts/
     @GetMapping(produces = "application/json")
     public List<Post> getAll() {
         return postService.getAll();
     }
 
-    // http://localhost:8080/posts/addCommentToPost/
     @PostMapping("/addCommentToPost")
     public void addCommentToPost(@RequestBody NewCommentDto newCommentDto) {
-        String postId= newCommentDto.getPostId();
-        String content=newCommentDto.getContent();
+        String postId = newCommentDto.getPostId();
+        String content = newCommentDto.getContent();
         postService.addCommentToPost(postId, content);
     }
 
     @RequestMapping(value = "/addPost", produces = {MediaType.IMAGE_PNG_VALUE, "application/json"})
     public void uploadImage(@RequestParam("imageFile") MultipartFile file,
-                                         @RequestParam("description") String description) {
-
+                            @RequestParam("description") String description) {
         try {
             byte[] lob = file.getBytes();
             postService.addPost(description, lob);
-        } catch(IOException e) {
+        } catch (IOException e) {
             logger.info("File upload problem");
         }
     }
-
-
 }
