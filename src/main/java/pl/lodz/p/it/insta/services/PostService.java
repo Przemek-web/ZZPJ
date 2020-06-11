@@ -47,11 +47,13 @@ public class PostService {
     }
 
     public void deletePost(long id) {
-        postRepository.delete(postRepository.getOne(id));
+        postRepository.delete(postRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", id)));
     }
 
     public void deletePostComment(long id) {
-        commentRepository.delete(commentRepository.getOne(id));
+        commentRepository.delete(commentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Comment", "id", id)));
     }
 
 }

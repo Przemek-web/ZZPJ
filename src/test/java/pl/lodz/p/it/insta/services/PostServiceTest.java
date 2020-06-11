@@ -50,16 +50,20 @@ public class PostServiceTest {
         Assert.assertEquals(comment.getAccount().getUsername(), "ObiKenobi14");
         Assert.assertEquals(comment.getAddDate().getMinute(), LocalDateTime.now().getMinute());
         Assert.assertEquals(comment.getPost().getDescription(), "Złapałem jakąś dzikuske, mówi że nazywa się Ygritte");
-
-        //nie dziala - czemu ?
-        /*postService.deletePostComment(comment.getId());
-        Post post2 = postService.getAll().get(0);
-        comments = (List<Comment>) post2.getComments();
-        Assert.assertEquals(comments.size(), 3);*/
     }
 
     @Test(expected = ResourceNotFoundException.class)
     public void addCommentExceptionTest() {
         postService.addCommentToPost(72, "Komentarz testowy 2");
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void deleteExceptionTest() {
+        postService.deletePost(72);
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void deleteCommentExceptionTest() {
+        postService.deletePostComment(72);
     }
 }

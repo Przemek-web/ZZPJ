@@ -39,12 +39,6 @@ public class ForumPostServiceTest {
         Assert.assertEquals(post.getContent(), "Testowy post");
         Assert.assertEquals(post.getAccount().getUsername(), "ObiKenobi14");
         Assert.assertEquals(post.getAddDate().getMinute(), LocalDateTime.now().getMinute());
-
-        //to samo jak z komentarzami
-        /*forumPostService.deleteForumPost(post.getId());
-        Topic topic2 = topicService.getTopic(1);
-        List<ForumPost> forumPosts2 = (List<ForumPost>) topic2.getForumPosts();
-        Assert.assertEquals(forumPosts2.size(), 4);*/
     }
 
     @Test(expected = ResourceNotFoundException.class)
