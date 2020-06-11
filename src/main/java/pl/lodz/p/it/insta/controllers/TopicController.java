@@ -20,10 +20,10 @@ import java.util.List;
 public class TopicController {
 
     private final TopicService topicService;
-    private ForumPostService forumPostService;
+    private final ForumPostService forumPostService;
 
     @Autowired
-    public TopicController(TopicService topicService,ForumPostService forumPostService) {
+    public TopicController(TopicService topicService, ForumPostService forumPostService) {
         this.topicService = topicService;
         this.forumPostService = forumPostService;
     }
@@ -66,13 +66,15 @@ public class TopicController {
         forumPostService.deleteForumPost(id);
     }
 
-    @PutMapping("/forumPost/{id}")
-    public void updateTopic(@PathVariable Long id,@RequestBody EditTopicDto editTopicDto){
-        topicService.updateTopic(id, editTopicDto);
+    //http://localhost:8080/forum/editTopic
+    @PutMapping("/editTopic")
+    public void updateTopic(@RequestBody EditTopicDto editTopicDto){
+        topicService.updateTopic(editTopicDto.getTopicId(), editTopicDto.getTitle());
     }
 
-    @PutMapping("/topic/{id}")
-    public void updateForumPost(@PathVariable Long id,@RequestBody EditForumPostDto editForumPostDto){
-        forumPostService.updateForumPost(id, editForumPostDto);
+    //http://localhost:8080/forum/editForumPost
+    @PutMapping("/editForumPost")
+    public void updateForumPost(@RequestBody EditForumPostDto editForumPostDto){
+        forumPostService.updateForumPost(editForumPostDto.getPostId(), editForumPostDto.getContent());
     }
 }

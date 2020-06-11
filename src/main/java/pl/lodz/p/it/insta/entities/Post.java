@@ -24,7 +24,7 @@ public class Post implements Comparable<Post>{
     private Account account;
     //location to potem bajerka
 
-    @OneToMany (mappedBy = "post")
+    @OneToMany (mappedBy = "post", cascade = CascadeType.REMOVE)
     @Lazy(false)
     private Collection<Comment> comments = new ArrayList<>();
 
