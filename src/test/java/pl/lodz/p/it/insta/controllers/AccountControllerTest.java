@@ -28,20 +28,6 @@ public class AccountControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    private Gson gson = new Gson();
-
-    @Test
-    public void getCurrentUserTest() throws Exception {
-        //TODO naprawic
-        /*mvc.perform( MockMvcRequestBuilders
-                .get("/accounts/me")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.username", is("ObiKenobi14")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", is("Obi-Wan")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", is("Kenobi")));*/
-    }
-
     @Test
     public void getUserProfileTest() throws Exception {
         mvc.perform( MockMvcRequestBuilders
@@ -54,10 +40,40 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void checkUsernameAvailability() {
+    public void getUserProfileWrongTest() throws Exception {
+        mvc.perform( MockMvcRequestBuilders
+                .get("/accounts/NieMaGo")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(404));
     }
 
     @Test
-    public void checkEmailAvailability() {
+    public void checkUsernameAvailability() throws Exception {
+        mvc.perform( MockMvcRequestBuilders
+                .get("/accounts/checkUsernameAvailability")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("username", "NieMaGo"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.available", is(true)));
+
+        mvc.perform( MockMvcRequestBuilders
+                .get("/accounts/checkUsernameAvailability")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("username", "$$VADER$$"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.available", is(false)));
+    }
+
+    @Test
+    public void checkEmailAvailability() throws Exception {
+        mvc.perform( MockMvcRequestBuilders
+                .get("/accounts/checkEmailAvailability")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("email", "NieMaGo@wp.pl"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.available", is(true)));
+
+        mvc.perform( MockMvcRequestBuilders
+                .get("/accounts/checkEmailAvailability")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("email", "vader@02.pl"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.available", is(false)));
     }
 }
