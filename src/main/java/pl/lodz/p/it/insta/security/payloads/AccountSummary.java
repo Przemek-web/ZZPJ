@@ -10,11 +10,13 @@ public class AccountSummary {
     private String username;
     private String firstName;
     private String lastName;
+    private String email;
 
-    public AccountSummary(Long id, String username, String firstName, String lastName) {
+    public AccountSummary(Long id, String username, String firstName, String lastName, String email) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
     }
 }

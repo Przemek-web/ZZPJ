@@ -3,6 +3,8 @@ package pl.lodz.p.it.insta.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import pl.lodz.p.it.insta.dtos.EditForumPostDto;
+import pl.lodz.p.it.insta.dtos.EditUserDto;
 import pl.lodz.p.it.insta.entities.Account;
 import pl.lodz.p.it.insta.exceptions.ResourceNotFoundException;
 import pl.lodz.p.it.insta.security.UserDetailsImpl;
@@ -25,7 +27,7 @@ public class AccountController {
     public AccountSummary getCurrentUser(Authentication authentication) {
         UserDetailsImpl currentUser = (UserDetailsImpl) authentication.getPrincipal();
         return new AccountSummary(currentUser.getId(), currentUser.getUsername(),
-                currentUser.getFirstName(), currentUser.getLastName());
+                currentUser.getFirstName(), currentUser.getLastName(), currentUser.getEmail());
     }
 
     @GetMapping("/{username}")
@@ -45,5 +47,10 @@ public class AccountController {
     @GetMapping("/checkEmailAvailability")
     public UserIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
         return new UserIdentityAvailability(!accountService.existsByEmail(email));
+    }
+
+    @PutMapping("/editUser")
+    public void editUser(@RequestBody EditUserDto editUserDto){
+        accountService.editUser(editUserDto.getAccountId(), editUserDto.getFirstName(), editUserDto.getLastName(), editUserDto.getEmail());
     }
 }
