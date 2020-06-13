@@ -42,16 +42,10 @@ public class AccountService {
         Account editedAccount = accountRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Account", "id", userId));
 
-        if(editedAccount.getFirstName()!= null) {
             editedAccount.setFirstName(firstName);
-        }
-        if(editedAccount.getLastName()!= null) {
             editedAccount.setLastName(lastName);
-        }
-        if(editedAccount.getEmail()!=null) {
             editedAccount.setEmail(email);
-        }
 
-        accountRepository.save(editedAccount);
+            accountRepository.save(editedAccount);
     }
 }
