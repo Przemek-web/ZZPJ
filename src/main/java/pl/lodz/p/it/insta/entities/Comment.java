@@ -12,12 +12,12 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Comment implements Comparable<Comment>{
+public class Comment implements Comparable<Comment> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min=1)
+    @Size(min = 1)
     private String content;
     private LocalDateTime addDate;
     @ManyToOne

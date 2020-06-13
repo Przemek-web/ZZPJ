@@ -28,53 +28,45 @@ public class TopicController {
         this.forumPostService = forumPostService;
     }
 
-    // http://localhost:8080/forum/
     @GetMapping(produces = "application/json")
     public List<Topic> getAll() {
         return topicService.getAll();
     }
 
-    // http://localhost:8080/forum/topic/id
-    @GetMapping(value = "/topic/{id}",produces = "application/json")
+    @GetMapping(value = "/topic/{id}", produces = "application/json")
     public Topic getTopic(@PathVariable Long id) {
         return topicService.getTopic(id);
     }
 
-    // http://localhost:8080/forum/addTopic
     @PostMapping("/addTopic")
-    public void addTopic(@RequestBody NewTopicDto newTopicDto){
+    public void addTopic(@RequestBody NewTopicDto newTopicDto) {
         topicService.addTopic(newTopicDto.getTitle());
     }
 
-    // http://localhost:8080/forum/addForumPost
     @PostMapping("/addForumPost")
-    public void addForumPost(@RequestBody NewForumPostDto newForumPostDto){
+    public void addForumPost(@RequestBody NewForumPostDto newForumPostDto) {
         String content = newForumPostDto.getContent();
-        long topicId  = newForumPostDto.getTopicId();
-        forumPostService.addForumPost(content,topicId);
+        long topicId = newForumPostDto.getTopicId();
+        forumPostService.addForumPost(content, topicId);
     }
 
-    // http://localhost:8080/forum/topic/id
     @DeleteMapping("/topic/{id}")
     public void deleteTopic(@PathVariable Long id) {
         topicService.deleteTopic(id);
     }
 
-    // http://localhost:8080/forum/forumPost/id
     @DeleteMapping("/forumPost/{id}")
     public void deleteForumPost(@PathVariable Long id) {
         forumPostService.deleteForumPost(id);
     }
 
-    //http://localhost:8080/forum/editTopic
     @PutMapping("/editTopic")
-    public void updateTopic(@RequestBody EditTopicDto editTopicDto){
+    public void updateTopic(@RequestBody EditTopicDto editTopicDto) {
         topicService.updateTopic(editTopicDto.getTopicId(), editTopicDto.getTitle());
     }
 
-    //http://localhost:8080/forum/editForumPost
     @PutMapping("/editForumPost")
-    public void updateForumPost(@RequestBody EditForumPostDto editForumPostDto){
+    public void updateForumPost(@RequestBody EditForumPostDto editForumPostDto) {
         forumPostService.updateForumPost(editForumPostDto.getPostId(), editForumPostDto.getContent());
     }
 }

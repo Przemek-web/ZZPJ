@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class ForumPost implements Comparable<ForumPost>{
+public class ForumPost implements Comparable<ForumPost> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

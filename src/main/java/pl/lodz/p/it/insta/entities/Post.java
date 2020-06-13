@@ -12,7 +12,7 @@ import java.util.Collection;
 @Entity
 @Getter
 @Setter
-public class Post implements Comparable<Post>{
+public class Post implements Comparable<Post> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +24,7 @@ public class Post implements Comparable<Post>{
     private Account account;
     //location to potem bajerka
 
-    @OneToMany (mappedBy = "post", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     @Lazy(false)
     private Collection<Comment> comments = new ArrayList<>();
 
