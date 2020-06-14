@@ -23,7 +23,7 @@ public class CommentRepositoryTest {
     private CommentRepository commentRepository;
 
 
-    @Test
+    @Test(expected = ConstraintViolationException.class)
     public void addCommentToPost() {
         Comment comment = new Comment();
         comment.setContent("content");
