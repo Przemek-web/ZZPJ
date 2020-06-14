@@ -37,12 +37,12 @@ public class ForumPostService {
         forumPostRepository.save(forumPost);
     }
 
-    public void deleteForumPost(long id){
+    public void deleteForumPost(long id) {
         forumPostRepository.delete(forumPostRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Topic", "id", id)));
     }
 
-    public void updateForumPost(long id, String content){
+    public void updateForumPost(long id, String content) {
         ForumPost editedPost = forumPostRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Topic", "id", id));
         editedPost.setContent(content);

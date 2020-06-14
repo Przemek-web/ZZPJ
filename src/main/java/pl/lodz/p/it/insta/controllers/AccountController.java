@@ -8,9 +8,9 @@ import pl.lodz.p.it.insta.dtos.EditUserDto;
 import pl.lodz.p.it.insta.entities.Account;
 import pl.lodz.p.it.insta.exceptions.ResourceNotFoundException;
 import pl.lodz.p.it.insta.security.UserDetailsImpl;
-import pl.lodz.p.it.insta.security.payloads.AccountDetails;
-import pl.lodz.p.it.insta.security.payloads.AccountSummary;
-import pl.lodz.p.it.insta.security.payloads.UserIdentityAvailability;
+import pl.lodz.p.it.insta.dtos.AccountDetailsDto;
+import pl.lodz.p.it.insta.dtos.AccountSummaryDto;
+import pl.lodz.p.it.insta.dtos.UserIdentityAvailability;
 import pl.lodz.p.it.insta.services.AccountService;
 
 @RestController
@@ -24,18 +24,18 @@ public class AccountController {
     }
 
     @GetMapping("/me")
-    public AccountSummary getCurrentUser(Authentication authentication) {
+    public AccountSummaryDto getCurrentUser(Authentication authentication) {
         UserDetailsImpl currentUser = (UserDetailsImpl) authentication.getPrincipal();
-        return new AccountSummary(currentUser.getId(), currentUser.getUsername(),
+        return new AccountSummaryDto(currentUser.getId(), currentUser.getUsername(),
                 currentUser.getFirstName(), currentUser.getLastName(), currentUser.getEmail());
     }
 
     @GetMapping("/{username}")
-    public AccountDetails getUserProfile(@PathVariable(value = "username") String username) {
+    public AccountDetailsDto getUserProfile(@PathVariable(value = "username") String username) {
         Account account = accountService.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("Account", "username", username));
 
-        return new AccountDetails(account.getFirstName(), account.getLastName(),
+        return new AccountDetailsDto(account.getFirstName(), account.getLastName(),
                 account.getUsername(), account.getEmail());
     }
 
