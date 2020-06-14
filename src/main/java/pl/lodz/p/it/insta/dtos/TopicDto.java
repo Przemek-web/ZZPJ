@@ -24,4 +24,7 @@ public class TopicDto {
         this.account = account;
         this.forumPosts = forumPosts;
     }
+
+    public TopicDto() {
+    }
 }

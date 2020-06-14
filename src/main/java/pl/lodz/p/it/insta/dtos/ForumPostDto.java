@@ -19,4 +19,7 @@ public class ForumPostDto {
         this.addDate = addDate;
         this.account = account;
     }
+
+    public ForumPostDto() {
+    }
 }

@@ -74,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/accounts/checkUsernameAvailability", "/accounts/checkEmailAvailability")
                 .permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().permitAll();
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

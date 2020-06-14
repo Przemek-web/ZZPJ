@@ -23,4 +23,7 @@ public class CommentDto {
         this.addDate = addDate;
         this.account = account;
     }
+
+    public CommentDto() {
+    }
 }

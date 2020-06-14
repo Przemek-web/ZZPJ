@@ -19,4 +19,7 @@ public class AccountSummaryDto {
         this.lastName = lastName;
         this.email = email;
     }
+
+    public AccountSummaryDto() {
+    }
 }

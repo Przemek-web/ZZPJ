@@ -1,5 +1,6 @@
 package pl.lodz.p.it.insta.controllers;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -20,20 +21,21 @@ public class PostController {
 
     private final PostService postService;
     Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public PostController(PostService postService) {
+    public PostController(PostService postService, ModelMapper modelMapper) {
         this.postService = postService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping(produces = "application/json")
-    public List<Post> getAll() {
+    public List<PostDto> getAll() {
         List<PostDto> postDtoList = new ArrayList<>();
-        for (Post post: postService.getAll()) {
-            postDtoList.add(new PostDto(post.getId(),post.getLob(),post.getDescription(),post.getAddDate(),post.get))
+        for (Post post : postService.getAll()) {
+            postDtoList.add(modelMapper.map(post,PostDto.class));
         }
-
-        return postService.getAll();
+        return postDtoList;
     }
 
     @PostMapping("/addCommentToPost")

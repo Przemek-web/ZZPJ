@@ -1,10 +1,15 @@
 package pl.lodz.p.it.insta.dtos;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class PostDto {
 
     private Long id;
@@ -21,5 +26,8 @@ public class PostDto {
         this.addDate = addDate;
         this.account = account;
         this.comments = comments;
+    }
+
+    public PostDto() {
     }
 }
