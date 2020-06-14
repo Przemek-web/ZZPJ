@@ -40,6 +40,18 @@ public class PostControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[4].account.username", is("ObiKenobi14")));
     }
 
+
+    //TODO po poprawie
+    @Test
+    public void addTest() {
+
+    }
+
+    @Test
+    public void addWrongTest() {
+
+    }
+
     @Test
     public void addCommentTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders
