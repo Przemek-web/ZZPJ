@@ -14,7 +14,7 @@ import java.util.Collection;
 @Entity
 @Getter
 @Setter
-public class Post implements Comparable<Post>{
+public class Post implements Comparable<Post> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
