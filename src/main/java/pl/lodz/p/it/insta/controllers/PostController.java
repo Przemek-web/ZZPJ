@@ -5,10 +5,12 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.lodz.p.it.insta.dtos.NewCommentDto;
+import pl.lodz.p.it.insta.dtos.PostDto;
 import pl.lodz.p.it.insta.entities.Post;
 import pl.lodz.p.it.insta.services.PostService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -26,6 +28,11 @@ public class PostController {
 
     @GetMapping(produces = "application/json")
     public List<Post> getAll() {
+        List<PostDto> postDtoList = new ArrayList<>();
+        for (Post post: postService.getAll()) {
+            postDtoList.add(new PostDto(post.getId(),post.getLob(),post.getDescription(),post.getAddDate(),post.get))
+        }
+
         return postService.getAll();
     }
 
