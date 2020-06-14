@@ -32,8 +32,7 @@ public class AccountController {
 
     @GetMapping("/{username}")
     public AccountDetailsDto getUserProfile(@PathVariable(value = "username") String username) {
-        Account account = accountService.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("Account", "username", username));
+        Account account = accountService.findByUsername(username);
 
         return new AccountDetailsDto(account.getFirstName(), account.getLastName(),
                 account.getUsername(), account.getEmail());

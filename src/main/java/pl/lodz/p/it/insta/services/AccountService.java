@@ -26,8 +26,9 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public Optional<Account> findByUsername(String username) {
-        return accountRepository.findByUsername(username);
+    public Account findByUsername(String username) {
+        return accountRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Account", "username", username));
     }
 
     public Boolean existsByUsername(String login) {
