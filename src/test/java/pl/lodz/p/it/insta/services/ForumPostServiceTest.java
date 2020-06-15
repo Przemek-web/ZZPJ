@@ -35,7 +35,7 @@ public class ForumPostServiceTest {
         List<ForumPost> forumPosts = (List<ForumPost>) topic.getForumPosts();
 
         ForumPost post = forumPosts.get(forumPosts.size() - 1);
-        Assert.assertEquals(forumPosts.size(), 5);
+        Assert.assertEquals(forumPosts.size(), 4);
         Assert.assertEquals(post.getContent(), "Testowy post");
         Assert.assertEquals(post.getAccount().getUsername(), "ObiKenobi14");
         Assert.assertTrue(post.getAddDate().isBefore(LocalDateTime.now().plusMinutes(1))
@@ -54,12 +54,13 @@ public class ForumPostServiceTest {
 
     @Test
     public void updateTest() {
-        Topic topic = topicService.getTopic(1);
+        List<Topic> all = topicService.getAll();
+        Topic topic = topicService.getTopic(3);
         List<ForumPost> forumPosts = (List<ForumPost>) topic.getForumPosts();
         String oldContent = forumPosts.get(0).getContent();
-        forumPostService.updateForumPost(1, "Testowa zmiana");
+        forumPostService.updateForumPost(3, "Testowa zmiana");
 
-        Topic topic2 = topicService.getTopic(1);
+        Topic topic2 = topicService.getTopic(3);
         List<ForumPost> forumPosts2 = (List<ForumPost>) topic2.getForumPosts();
         ForumPost forumPostAfterChange = forumPosts2.get(0);
         Assert.assertEquals(forumPostAfterChange.getContent(), "Testowa zmiana");

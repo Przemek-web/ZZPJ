@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import pl.lodz.p.it.insta.entities.Topic;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -31,5 +32,6 @@ public class TopicRepositoryTest {
         int size = forumPostRepository.findAll().size();
         topicRepository.delete(topicRepository.getOne(1L));
         Assert.assertEquals(forumPostRepository.findAll().size(), size - 4);
+
     }
 }

@@ -35,8 +35,8 @@ public class PostServiceTest {
 
     @Test
     public void getCommentsTest() {
-        Post post = postService.getAll().get(0);
-        Assert.assertEquals(post.getComments().size(), 3);
+        Post post = postService.getAll().get(1);
+        Assert.assertEquals(post.getComments().size(), 2);
         Assert.assertTrue(Ordering.natural().isOrdered(post.getComments()));
     }
 
@@ -44,11 +44,11 @@ public class PostServiceTest {
     public void addCommentTest() {
         postService.addCommentToPost(2, "Komentarz testowy");
 
-        Post post = postService.getAll().get(0);
+        Post post = postService.getAll().get(1);
         List<Comment> comments = (List<Comment>) post.getComments();
         Comment comment = comments.get(comments.size() - 1);
         Assert.assertEquals(comment.getContent(), "Komentarz testowy");
-        Assert.assertEquals(comments.size(), 4);
+        Assert.assertEquals(comments.size(), 3);
         Assert.assertEquals(comment.getAccount().getUsername(), "ObiKenobi14");
         Assert.assertTrue(comment.getAddDate().isBefore(LocalDateTime.now().plusMinutes(1))
                 && comment.getAddDate().isAfter(LocalDateTime.now().minusMinutes(1)));

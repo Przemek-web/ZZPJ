@@ -33,7 +33,7 @@ public class TopicServiceTest {
     public void getTopicTest() {
         Topic topic = topicService.getTopic(1);
         Assert.assertTrue(Ordering.natural().reverse().isOrdered(topic.getForumPosts()));
-        Assert.assertEquals(topic.getForumPosts().size(), 4);
+        Assert.assertEquals(topic.getForumPosts().size(), 3);
         Assert.assertEquals(topic.getTitle(), "Proponuję żeby każdy coś tu napisał o sobie :)");
     }
 
