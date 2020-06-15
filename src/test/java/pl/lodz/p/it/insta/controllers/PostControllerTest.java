@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -35,21 +36,21 @@ public class PostControllerTest {
                 .get("/posts")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(9)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].description", is("Się jara dzieciaku he he...")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[4].account.username", is("ObiKenobi14")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(10)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[2].description", is("Się jara dzieciaku he he...")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[5].account.username", is("ObiKenobi14")));
     }
 
 
-    //TODO po poprawie
     @Test
-    public void addTest() {
+    public void addTest() throws Exception {
+        MockMultipartFile file = new MockMultipartFile("imageFile", "test.png", MediaType.IMAGE_PNG_VALUE, "<<data>>".getBytes());
 
-    }
-
-    @Test
-    public void addWrongTest() {
-
+        mvc.perform(MockMvcRequestBuilders
+                .multipart("/posts/addPost")
+                .file(file)
+                .param("description", "Testowy post"))
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -73,7 +74,7 @@ public class PostControllerTest {
         mvc.perform(MockMvcRequestBuilders
                 .post("/posts/addCommentToPost")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(gson.toJson(new NewCommentDto(10, "Testowy komentarz"))))
+                .content(gson.toJson(new NewCommentDto(20, "Testowy komentarz"))))
                 .andExpect(status().is(404));
     }
 
@@ -88,13 +89,13 @@ public class PostControllerTest {
                 .get("/posts")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(8)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(9)));
     }
 
     @Test
     public void deleteWrongTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders
-                .delete("/posts/post/10")
+                .delete("/posts/post/20")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(404));
     }
