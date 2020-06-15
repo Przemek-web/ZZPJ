@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EditUserDto {
-    private long accountId;
+    private String username;
     private String firstName;
     private String lastName;
     private String email;

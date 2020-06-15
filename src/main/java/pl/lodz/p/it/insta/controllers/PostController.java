@@ -45,7 +45,7 @@ public class PostController {
         postService.addCommentToPost(postId, content);
     }
 
-    @RequestMapping(value = "/addPost", produces = {MediaType.IMAGE_PNG_VALUE, "application/json"})
+    @PostMapping(value = "/addPost", produces = {MediaType.IMAGE_PNG_VALUE, "application/json"})
     public void uploadImage(@RequestParam("imageFile") MultipartFile file,
                             @RequestParam("description") String description) {
         try {
