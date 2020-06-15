@@ -50,6 +50,6 @@ public class AccountController {
 
     @PutMapping("/editUser")
     public void editUser(@RequestBody EditUserDto editUserDto){
-        accountService.editUser(editUserDto.getAccountId(), editUserDto.getFirstName(), editUserDto.getLastName(), editUserDto.getEmail());
+        accountService.editUser(editUserDto.getUsername(), editUserDto.getFirstName(), editUserDto.getLastName(), editUserDto.getEmail());
     }
 }

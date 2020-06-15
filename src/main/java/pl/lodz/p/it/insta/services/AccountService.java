@@ -39,9 +39,9 @@ public class AccountService {
         return accountRepository.existsByEmail(email);
     }
 
-    public void editUser( Long userId, String firstName, String lastName, String email) {
-        Account editedAccount = accountRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Account", "id", userId));
+    public void editUser( String username, String firstName, String lastName, String email) {
+        Account editedAccount = accountRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Account", "username", username));
 
             editedAccount.setFirstName(firstName);
             editedAccount.setLastName(lastName);
