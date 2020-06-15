@@ -10,6 +10,7 @@ import pl.lodz.p.it.insta.services.TopicService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/forum")
@@ -30,11 +31,9 @@ public class TopicController {
 
     @GetMapping(produces = "application/json")
     public List<TopicDto> getAll() {
-        List<TopicDto> topicDtoList = new ArrayList();
-        for (Topic topic: topicService.getAll()) {
-            topicDtoList.add(modelMapper.map(topic,TopicDto.class));
-        }
-        return topicDtoList;
+        return topicService.getAll().stream()
+                .map(t -> modelMapper.map(t, TopicDto.class))
+                .collect(Collectors.toList());
     }
 
     @GetMapping(value = "/topic/{id}", produces = "application/json")

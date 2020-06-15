@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/posts")
@@ -31,11 +32,9 @@ public class PostController {
 
     @GetMapping(produces = "application/json")
     public List<PostDto> getAll() {
-        List<PostDto> postDtoList = new ArrayList<>();
-        for (Post post : postService.getAll()) {
-            postDtoList.add(modelMapper.map(post,PostDto.class));
-        }
-        return postDtoList;
+        return postService.getAll().stream()
+                .map(p -> modelMapper.map(p, PostDto.class))
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/addCommentToPost")
@@ -46,8 +45,8 @@ public class PostController {
     }
 
     @PostMapping(value = "/addPost", produces = {MediaType.IMAGE_PNG_VALUE, "application/json"})
-    public void uploadImage(@RequestParam("imageFile") MultipartFile file,
-                            @RequestParam("description") String description) {
+    public void addPost(@RequestParam("imageFile") MultipartFile file,
+                        @RequestParam("description") String description) {
         try {
             byte[] lob = file.getBytes();
             postService.addPost(description, lob);
