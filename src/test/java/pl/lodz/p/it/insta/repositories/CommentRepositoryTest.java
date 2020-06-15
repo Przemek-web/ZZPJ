@@ -22,11 +22,23 @@ public class CommentRepositoryTest {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private AccountRepository accountRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-    @Test(expected = ConstraintViolationException.class)
+
+    @Test
     public void addCommentToPost() {
+        Account account = accountRepository.findAll().get(0);
+        Post post = postRepository.findAll().get(0);
+
         Comment comment = new Comment();
         comment.setContent("content");
+        comment.setAddDate(LocalDateTime.now());
+        comment.setAccount(account);
+        comment.setPost(post);
+
         commentRepository.save(comment);
         Assert.assertTrue(commentRepository.exists(Example.of(comment)));
         commentRepository.delete(comment);
