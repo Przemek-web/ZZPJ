@@ -29,9 +29,9 @@ public class CommentRepositoryTest {
 
 
     @Test
-    public void addCommentToPost() {
-        Account account = accountRepository.findAll().get(0);
-        Post post = postRepository.findAll().get(0);
+    public void addCommentToPost() throws Exception {
+        Account account = accountRepository.findAll().stream().findFirst().orElseThrow(Exception::new);
+        Post post = postRepository.findAll().stream().findFirst().orElseThrow(Exception::new);
 
         Comment comment = new Comment();
         comment.setContent("content");
