@@ -39,7 +39,8 @@ public class AccountService {
         return accountRepository.existsByEmail(email);
     }
 
-    public void editUser( String username, String firstName, String lastName, String email) {
+    public void editUser(String firstName, String lastName, String email) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Account editedAccount = accountRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("Account", "username", username));
 

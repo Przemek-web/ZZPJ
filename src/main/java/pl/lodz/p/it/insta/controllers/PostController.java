@@ -2,16 +2,16 @@ package pl.lodz.p.it.insta.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.lodz.p.it.insta.dtos.NewCommentDto;
 import pl.lodz.p.it.insta.dtos.PostDto;
-import pl.lodz.p.it.insta.entities.Post;
 import pl.lodz.p.it.insta.services.PostService;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -44,15 +44,17 @@ public class PostController {
         postService.addCommentToPost(postId, content);
     }
 
-    @PostMapping(value = "/addPost", produces = {MediaType.IMAGE_PNG_VALUE, "application/json"})
-    public void addPost(@RequestParam("imageFile") MultipartFile file,
-                        @RequestParam("description") String description) {
+    @PostMapping("/addPost")
+    public ResponseEntity<?> addPost(@RequestParam("imageFile") MultipartFile file,
+                                          @RequestParam("description") String description) {
         try {
             byte[] lob = file.getBytes();
             postService.addPost(description, lob);
         } catch (IOException e) {
             logger.info("File upload problem");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/post/{id}")
