@@ -1,6 +1,8 @@
 package pl.lodz.p.it.insta.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -9,6 +11,8 @@ import java.util.Collection;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class TopicDto {
 
     private Long id;
@@ -16,15 +20,4 @@ public class TopicDto {
     private LocalDateTime addDate;
     private AccountSummaryDto account;
     private Collection<ForumPostDto> forumPosts = new ArrayList<>();
-
-    public TopicDto(Long id, String title, LocalDateTime addDate, AccountSummaryDto account, Collection<ForumPostDto> forumPosts) {
-        this.id = id;
-        this.title = title;
-        this.addDate = addDate;
-        this.account = account;
-        this.forumPosts = forumPosts;
-    }
-
-    public TopicDto() {
-    }
 }

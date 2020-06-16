@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.it.insta.entities.Account;
@@ -15,6 +16,7 @@ import pl.lodz.p.it.insta.exceptions.ResourceNotFoundException;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
+@DirtiesContext
 @WithMockUser(username = "ObiKenobi14", password = "Duch123")
 public class AccountServiceTest {
 
