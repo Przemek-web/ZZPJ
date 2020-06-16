@@ -44,10 +44,8 @@ public class CommentRepositoryTest {
         Assert.assertEquals(commentRepository.findAll().size(), 7);
         commentRepository.save(comment);
         Assert.assertEquals(commentRepository.findAll().size(), 8);
-        //Assert.assertTrue(commentRepository.exists(Example.of(comment)));
         commentRepository.delete(comment);
         Assert.assertEquals(commentRepository.findAll().size(), 7);
-        //Assert.assertFalse(commentRepository.exists(Example.of(comment)));
     }
 
     @Test(expected = ConstraintViolationException.class)
@@ -55,6 +53,5 @@ public class CommentRepositoryTest {
         Comment comment = new Comment();
         comment.setContent("");
         commentRepository.save(comment);
-        Assert.assertFalse(commentRepository.exists(Example.of(comment)));
     }
 }
